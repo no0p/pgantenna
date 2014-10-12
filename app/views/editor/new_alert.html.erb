@@ -1,0 +1,47 @@
+<%= form_tag create_alert_path, :class => 'bs-component' do %>
+	
+	<table class="form_table">
+	  <tr>
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Label</label>
+					<%= text_field_tag 'label', @alert.label, :class => 'form-control', :placeholder => 'Alert name' %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+	    <td>
+				<div class="form-group" style="width: 700px;">
+					<label class="control-label" for="focusedInput">Message</label>
+					<%= text_field_tag 'message', @alert.message, :class => 'form-control', :placeholder => 'The alert message will be the email body' %>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form_table">
+	  <tr> 
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Alert Query</label>
+					<div id="editor"></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+		  <td>
+		  	The alert query will be evaluated, and if the first cell in the result set is true, then an email will be sent to each <%= link_to 'configured alert_email', settings_path %>.
+		  </td>
+		</tr>
+	</table>
+
+  <textarea name="query" style="display: none;">
+  </textarea>
+	<br/>
+  <%= submit_tag 'Create Alert', :class => 'btn btn-primary' %>
+
+<% end %>
+
+
+
+<%= render 'ace' %>

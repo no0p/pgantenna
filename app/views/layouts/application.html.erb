@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pgantenna</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  
+  <% if @include_ace %>
+	  <%= javascript_include_tag 'ace/ace', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'ace/mode-pgsql', 'data-turbolinks-track' => true %>
+  <% end %>
+  
+</head>
+<body>
+
+  <div class="container">
+
+  	<%= render 'layouts/navbar' %>
+  	<%= render 'layouts/flash_message' %>
+  	
+		<%= yield %>
+  </div>
+</body>
+</html>

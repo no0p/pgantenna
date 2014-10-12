@@ -1,0 +1,11 @@
+<div class="charts">
+	
+	<% @plots.each do |p| %>
+	
+	  <div class="plot">
+	    <%= p.svg.html_safe %>
+	  </div>
+
+	<% end %>
+	
+</div>

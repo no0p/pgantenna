@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# pgantenna server startup script to be placed in file named /etc/init.d/pgantenna
+#
+# USAGE: start|stop|restart
+#
+ANTENNADIR=/opt/pgantenna
+
+case "$1" in
+start)
+echo "Starting pgantenna Server."
+${ANTENNADIR}/start 2>/dev/null 1>/dev/null &
+;;
+stop)
+echo "Stopping pgantenna Server"
+kill `cat ${ANTENNADIR}/log/server.pid`
+;;
+restart)
+# Check to see if the process is running
+echo "Stopping pgantenna Server"
+kill `cat ${ANTENNADIR}/log/server.pid`
+echo "Starting pgantenna Server."
+${ANTENNADIR}/start 2>/dev/null 1>/dev/null &
+;;
+
+*)
+echo “Relation Systems Server Process”
+echo $”Usage: $0 {start|stop|restart}”
+exit 1
+esac
+exit 0
+

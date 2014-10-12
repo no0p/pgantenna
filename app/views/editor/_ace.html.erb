@@ -1,0 +1,12 @@
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/vibrant_ink");
+    editor.getSession().setMode("ace/mode/pgsql");
+    
+    
+    var textarea = $('textarea[name="query"]');
+		editor.getSession().on("change", function () {
+				textarea.val(editor.getSession().getValue());
+		});
+    
+</script>

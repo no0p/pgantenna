@@ -1,0 +1,37 @@
+<div class="starting_message">
+	<p>
+	There is currently no postgresql cluster connected to this instance of pgantenna.  To start transmitting metrics from a cluster, please install <a href="https://github.com/no0p/pgsampler">pgsampler</a> on the cluster.<br/><br/>
+	
+	The <a href="https://github.com/no0p/pgsampler">pgsampler repository readme</a> contains detailed instructions for installation, but a short and direct reference is provided below for convenience.</p>
+  <br/>
+	
+	<h3>Connecting Pgsampler: The short guide</h3>
+
+	<p>To get started install pgsampler.  Debian/Ubuntu and CentOS packages are provided.  The universal instructions below cover how to install from source and manually configure.</p>
+	<br/><br/>
+	<pre class="guide">
+<code>git clone git@github.com:no0p/pgsampler.git
+make
+sudo make install</code></pre>
+	<br/></br/>
+	
+	<p>Once installed, configure pgsampler to send metrics to this instance by setting the following options in the cluster's postgresql.conf file:<br/><br/></p>
+
+	<pre class="guide">
+<code>shared_preload_libraries='pgsampler' # add pgsampler to whatever is already in this directive
+pgsampler.output_mode='network'
+pgsampler.output_network_host='1.2.3.4' # Replace with the IP for this pgantenna instance </code></pre>
+	<br/>
+	<br/>
+	<p>
+	  Now restart the postgresql cluster.  Messages regarding connectivity will be displayed in the Postgresql log file for the cluster.
+	</p>
+	<br/>
+	
+	<h3>Uninstalling</h3>
+	
+	<p>It's easy to effectively uninstall pgsampler for any reason.  If any issues arise and you want to rule out pgsampler, simply remove 'pgsampler' from the <b>shared_preload_libraries</b> directive and restart the server.
+	</p>
+	
+</div>
+<br/><br/><br/>

@@ -1,0 +1,23 @@
+<% if @current_connection.blank? %>
+	<%= render 'get_started' %>
+<% else %>
+	<%= render 'box_data' %>
+
+	<div style="clear: both;"></div>
+	<br/>
+
+	<%= render 'plot_grid' %>
+
+
+	<script>
+	// Poor man's refresh
+	<% if Rails.env == "production" %>
+		$(document).ready(function(){
+			setTimeout(function () { 
+				location.reload();
+			}, 10 * 1000);
+		});
+	<% end %>
+	</script>
+<% end %>
+

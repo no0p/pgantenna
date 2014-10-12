@@ -1,0 +1,16 @@
+<br/><br/>
+<div class="login_box">
+	<%= form_tag create_session_path do %>
+		<fieldset>
+		  <legend>Please Verify Access</legend>
+
+		  <div class="form-group">
+		    <div class="col-lg-10">
+		      <input type="password" class="form-control"  name="access_token" placeholder="Access Token">
+		    </div>
+		    <%= submit_tag 'Sign In', :class => "btn btn-primary" %>
+		  </div>
+		  
+		</fieldset>
+	<% end %>
+</div>

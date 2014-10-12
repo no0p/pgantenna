@@ -1,0 +1,58 @@
+<h4>New Plot Display</h4>
+<br/><br/>
+<%= form_tag create_plot_path, :class => 'bs-component' do %>
+	
+	<table class="form_table">
+	  <tr>
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Title</label>
+					<%= text_field_tag 'title', @plot.title, :class => 'form-control', :placeholder => 'Plot Title' %>
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<table class="form_table">
+	  <tr> 
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Width (% of row)</label>
+					<%= text_field_tag 'width', @plot.width, :class => 'form-control', :placeholder => 'Width as % of window' %>
+				</div>
+			</td>
+			<td class="last">	
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Height (pixels)</label>
+					<%= text_field_tag 'height', @plot.height, :class => 'form-control', :placeholder => 'Height in pixels' %>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form_table">
+	  <tr> 
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Plot Query</label>
+					<div id="editor"></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+		  <td>
+		  	The plot query will be passed to the <a href="https://github.com/no0p/plotpg">plotpg</a> plot() function and the results will be displayed on the status page.  For information on the statistics tables created please see the <a href="https://github.com/no0p/plotpg">pgantenna statistics tables reference guide.</a>.
+		  </td>
+		</tr>
+	</table>
+
+  <textarea name="query" style="display: none;">
+  </textarea>
+	<br/>
+  <%= submit_tag 'Create Plot', :class => 'btn btn-primary' %>
+
+<% end %>
+
+
+
+<%= render 'ace' %>

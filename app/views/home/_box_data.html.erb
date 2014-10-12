@@ -1,0 +1,28 @@
+<div class="status_header">
+	
+	<table class="box_holder" style="table-layout: fixed; background-color: #000000; width:100%">
+	  <% @boxes.in_groups_of(4, false) do |grp| %>
+			<tr>
+				<% grp.each do |box| %>
+				  <% 
+				  	box_class = "center_box" 
+				  	box_class = "left_box" if grp.first == box
+				  	box_class = "right_box" if grp.last == box
+				  %>
+				  
+				  
+					<td class="<%= box_class %>">
+						<div class="number_box">
+							<span class="datum">
+								<% display_value = box.metric_value %>
+								<% display_value ||= "?" %>
+								<%= display_value %>
+							</span><%= box.label %>
+						</div>
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+	
+</div>

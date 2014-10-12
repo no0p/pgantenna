@@ -1,0 +1,30 @@
+<h4>Box Displays</h4>
+<br/>
+
+<table class="table table-striped table-hover config-table">
+
+  <tbody>
+		<% @boxes.each do |p| %>
+			<tr>
+			  <td>
+			    <%= p.label %>
+			  </td>
+			
+			  <td>
+			    <div class="action_links">
+					  <%= link_to 'Edit', edit_box_path(p) %>&nbsp;
+					  <%= link_to 'Delete',  delete_box_path(p.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+					</div>
+			  </td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br/>
+
+<div class="main_action_row">
+  <%= link_to '+ Add new box', new_box_path, :class => 'edit_link' %> 
+  &nbsp;&nbsp;&nbsp;
+  <%= link_to 'Reset Defaults',  reset_boxes_path, class: 'edit_link last_link', method: :delete, data: { confirm: 'Are you sure?  This will delete all boxs and restore to default boxes.' } %>
+</div>

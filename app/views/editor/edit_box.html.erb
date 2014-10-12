@@ -1,0 +1,41 @@
+<%= form_tag update_box_path, :class => 'bs-component' do %>
+	
+	<table class="form_table">
+	  <tr>
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Label</label>
+					<%= text_field_tag 'label', @box.label, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<table class="form_table">
+	  <tr> 
+	    <td>
+				<div class="form-group" style="width: 300px;">
+					<label class="control-label" for="focusedInput">Box Stat Query</label>
+					<div id="editor"><%= @box.query %></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+		  <td>
+		  	The box query will be evaluated and the first cell in the result set will be displayed in the box. For information on the statistics tables created please see the <a href="https://github.com/no0p/plotpg">pgantenna statistics tables reference guide.
+		  </td>
+		</tr>
+	</table>
+
+	<%= hidden_field_tag :id, @box.id %>
+  <textarea name="query" style="display: none;">
+  	<%= @box.query %>
+  </textarea>
+	<br/>
+  <%= submit_tag 'Save Plot Changes', :class => 'btn btn-primary' %>
+
+<% end %>
+
+
+
+<%= render 'ace' %>

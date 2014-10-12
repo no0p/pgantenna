@@ -1,0 +1,103 @@
+
+<%= form_tag save_token_path do %>
+	<h4>Access Token</h4>
+	
+	<p>If populated, the access token will be required to view the pgantenna page.  This is light weight security intended for basic access control.</p>
+		
+	<table class="form_table">
+	  <tr>
+	    <td>
+				<div class="form-group" style="width: 300px;">
+				  <% message = "Access Token" %>
+				  <% message = "Set New Access Token" if @settings.access_token.present? %>
+					<%= password_field_tag :access_token, '', :class => 'form-control', :placeholder => message %>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<%= submit_tag 'Set Access Token', :class => 'btn btn-primary' %>
+	
+	<hr/>
+<% end %>	
+
+<%= form_tag save_settings_path do %>
+	<h4>Email Configuration</h4>
+	
+	<p>
+		To enable email alerting please enter AWS SES information below.
+	</p>
+	
+	<table class="form_table">
+	  <tr>
+	    <td>
+				<div class="form-group" style="width: 400px;">
+					<label class="control-label" for="focusedInput">SES Secret Key</label>
+					<%= text_field_tag :ses_secret_key, @settings.ses_secret_key, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+	    <td>
+				<div class="form-group" style="width: 400px;">
+					<label class="control-label" for="focusedInput">SES Access Key</label>
+					<%= text_field_tag :ses_access_key, @settings.ses_access_key, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+	    <td>
+				<div class="form-group" style="width: 400px;">
+					<label class="control-label" for="focusedInput">Sender Email Address</label>
+					<%= text_field_tag :ses_from_email, @settings.ses_from_email, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+	    <td>
+				<div class="form-group" style="width: 400px;">
+					<label class="control-label" for="focusedInput">Delay in Seconds Between Repeated Alerts</label>
+					<%= text_field_tag :repeat_notification_after_seconds, @settings.repeat_notification_after_seconds, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<%= submit_tag 'Save Settings', :class => 'btn btn-primary' %>&nbsp;&nbsp;
+	<% if @settings.ses_from_email.present? && @settings.ses_access_key.present? && @settings.ses_secret_key.present? && @alert_emails.length > 0 %>
+	  <%= link_to 'Send Test Email', send_test_email_path, :class => 'btn btn-info' %>
+	<% end %>
+
+<% end %>
+<br/><br/>
+<h4> Alert Emails </h4>
+<p>An email will be sent to the following email addresses when an alert event is detected.</p>
+
+<%= form_tag create_alert_email_path do %>
+	<table class="form_table table table-striped table-hover config-table">
+		<% @alert_emails.each do |ae| %>
+			<tr>
+				<td>
+					<%= ae.email %>
+				</td>
+				<td class="last">
+					<%= link_to 'Delete',  delete_alert_email_path(ae.id),  style: 'float: right;', method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	<table class="admin_control_form_table">
+		<tr>
+			<td><br/>
+				<%= text_field_tag :email, '', :class => 'form-control', :placeholder => 'Email address to be alerted', :size => 35 %>
+			</td>
+			<td class="last">
+				<br/>
+				<%= submit_tag 'Add Email Address', :class => 'btn btn-success' %>
+			</td>
+		</tr>
+	</table>
+<% end %>
+
+<br/><br/><br/>
+
+
