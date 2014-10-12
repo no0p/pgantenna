@@ -12,6 +12,7 @@ PLOT_DEFAULTS = <<SQL
   set plotpg.xlabel='textcolor rgb "white"'; 
   set plotpg.ylabel='textcolor rgb "white"';
   set plotpg.title='textcolor rgb "white"';
+  set plotpg.key='textcolor rgb "white"';
 SQL
 
 #   set plotpg.key='textcolor rgb "white"';

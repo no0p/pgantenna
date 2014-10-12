@@ -61,7 +61,8 @@ class EditorController < ApplicationController
 		if p.update_attributes(:title => params[:title],
 												:query => params[:query],
 												:height => params[:height],
-												:width => params[:width])
+												:width => params[:width],
+												:gnuplot_commands => params[:gnuplot_commands])
 			flash[:notice] = "Plot updated"
 			redirect_to index_plot_path
 		else
@@ -98,7 +99,10 @@ class EditorController < ApplicationController
 
 	def create_plot	
 		p = Plot.create(:title => params[:title],
-									:query => params[:query])
+										:query => params[:query],
+										:height => params[:height],
+										:width => params[:width],
+										:gnuplot_commands => params[:gnuplot_commands])
 		if p.id.present?
 			flash[:notice] = "Plot created"
 			redirect_to index_plot_path

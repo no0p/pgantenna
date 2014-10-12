@@ -25,7 +25,6 @@ class Plot < ActiveRecord::Base
 		plot_query += ")"
 		
 		plot = ActiveRecord::Base.connection.execute plot_query
-		
 		svg_string = plot.first["plot"]
 		
 		return svg_string

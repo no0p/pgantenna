@@ -19,4 +19,4 @@ gem 'puma'
 # gem 'nokogiri'
 gem 'aws-ses'
 
-#gem 'byebug', group: [:development, :test]
+gem 'byebug', group: [:development, :test]

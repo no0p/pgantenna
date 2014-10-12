@@ -14,6 +14,7 @@ module Reset
 		
 		tx_sec_plot!
 		connections_plot!
+		memory_plot!
 	end
 	
 	def self.boxes!
