@@ -12,16 +12,19 @@ SELECT measured_at as time, count(*) as connections
 	WHERE measured_at > now() - interval '4 hours'
 	GROUP BY measured_at
 	ORDER BY measured_at DESC
-	LIMIT 50
+	LIMIT 30
 SQL
 
 	gcmds = <<GNU
-		set style data boxes;
-		set style fill solid;
-		set boxwidth 2;
-		set xtics autofreq;
-		set key off;
-		set rmargin 8;
+set style data boxes;
+set style fill solid;
+set boxwidth 5;
+set xtics autofreq;
+set key off;
+set rmargin 8;
+set style line 1 lc rgb '#147b00';
+set style increment user;
+set yrange[0:]
 GNU
 
 		Plot.create(:title => 'Open Connections', 
