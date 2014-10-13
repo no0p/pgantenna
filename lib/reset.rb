@@ -29,7 +29,7 @@ module Reset
 		Alert.delete_all
 		
 		deadman_switch!
-		
+		filesystem_free_space!
 	end
 	
 end

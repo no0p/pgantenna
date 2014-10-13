@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 		  <td>
-		  	The alert query will be evaluated, and if the first cell in the result set is true, then an email will be sent to each <%= link_to 'configured alert_email', settings_path %>.
+		  	The alert query will be evaluated, and if the first cell in the result set exists and is not null, then an email will be sent to each <%= link_to 'configured alert_email', settings_path %>.  <a href="https://github.com/no0p/pgantenna/wiki/Customizing-Alerts">Alerts Guide</a>
 		  </td>
 		</tr>
 	</table>
