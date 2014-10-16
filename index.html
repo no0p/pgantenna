@@ -111,15 +111,32 @@
     </div>
     <!-- /.content-section-a -->
 
-    <div class="content-section-b">
+		<div class="content-section-b">
 
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-sm-6  col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="clearfix"></div>
-                    <h1 class="section-heading">Alerting</h1>
-                    <p class="lead">Configure email alerts.</p>
+                    <h1 class="section-heading">Write Alerts in SQL</h1>
+                    <p class="lead">An alert is triggered when an "alert query" returns a null value in the first column of the first cell.</p>
+                    
+                </div>
+                <div class="col-lg-7 col-lg-offset-1 col-sm-6">
+                  <br/>
+                    <h4>Has my cluster sent a heartbeat in the last minute?</h4>
+                    <pre><code>SELECT measured_at as is_alive
+  FROM heartbeats
+    WHERE measured_at > (clock_timestamp() - interval '1 minute')
+  LIMIT 1</code></pre>
+	<br/>
+                    <h4>Do any of my filesystems have less than 20% available space?</h4>
+                    <pre><code>SELECT measured_at as is_alive
+  FROM heartbeats
+    WHERE measured_at > (clock_timestamp() - interval '1 minute')
+  LIMIT 1</code></pre>
+	
+	 
                 </div>
             </div>
 
@@ -127,7 +144,9 @@
         <!-- /.container -->
 
     </div>
-    <!-- /.content-section-b -->
+
+
+
 
     <div class="content-section-a">
 
