@@ -32,27 +32,6 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="http://no0p.github.io/pgsampler">pgsampler</a>
-                    </li>
-                    <li>
-                      <a>|</a>
-                    </li>
-                    <li>
-                        <a href="http://no0p.github.io/pgantenna">pgantenna</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
     <!-- Header -->
     <div class="intro-header">
@@ -96,12 +75,14 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="clearfix"></div>
-                    <h1 class="section-heading">Monitoring</h1>
-                    <p class="lead"></p>
+                    <h1 class="section-heading">A Framework</h1>
+                    <p class="lead">Pgantenna receives database metrics from <a href="https://github.com/no0p/pgsampler">pgsampler</a>, and provides tools for monitoring, alerting, and reporting against this data.  
+                    <br/><br/>
+                    In this convention based framework, charts and alerts are are written entirely in SQL.</p>
                 </div>
-                <div class="col-lg-7 col-lg-offset-1 col-sm-6">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
                   <br/>
                   
                 </div>
@@ -111,6 +92,35 @@
     </div>
     <!-- /.content-section-a -->
 
+<div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="clearfix"></div>
+                    <h1 class="section-heading">Monitoring</h1>
+                    <p class="lead">
+                    Pgantenna stores time series for a <a href="https://github.com/no0p/pgantenna/wiki/Pgantenna-Database-Reference">variety of metrics</a> relating to database health and performance.  Custom charts are added to the pgantenna dashboard using <a href="http://no0p.github.io/plotpg/">plotpg</a>. 
+                    <br/>
+                    <a href="https://github.com/no0p/pgantenna/wiki/Alerts">Monitoring Documentation</a></p>
+                    
+                </div>
+                <div class="col-lg-7 col-lg-offset-1 col-sm-6">
+                  
+	 
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+
+
+
+
+
 		<div class="content-section-b">
 
         <div class="container">
@@ -119,7 +129,9 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="clearfix"></div>
                     <h1 class="section-heading">Write Alerts in SQL</h1>
-                    <p class="lead">An alert is triggered when an "alert query" returns a null value in the first column of the first cell.</p>
+                    <p class="lead">An alert is triggered when an "alert query" returns a null value in the first column of the first cell.
+                    <br/>
+                    <a href="https://github.com/no0p/pgantenna/wiki/Alerts">Alerts Documentation</a></p>
                     
                 </div>
                 <div class="col-lg-7 col-lg-offset-1 col-sm-6">
@@ -129,12 +141,18 @@
   FROM heartbeats
     WHERE measured_at > (clock_timestamp() - interval '1 minute')
   LIMIT 1</code></pre>
-	<br/>
-                    <h4>Do any of my filesystems have less than 20% available space?</h4>
-                    <pre><code>SELECT measured_at as is_alive
-  FROM heartbeats
-    WHERE measured_at > (clock_timestamp() - interval '1 minute')
-  LIMIT 1</code></pre>
+	<br/><br/>
+<h4>Do any of my filesystems have less than 20% available space?</h4>
+                    <pre><code>WITH last_stats as (
+  SELECT DISTINCT ON (filesystem_id) 
+         filesystem_id, measured_at, blk_avail, blks_in_frags
+    FROM stat_filesystems
+      ORDER BY filesystem_id, measured_at DESC
+)
+SELECT filesystems.name
+  FROM filesystems
+    INNER JOIN last_stats ON last_stats.filesystem_id = filesystems.id
+  WHERE ((blk_avail * blksize) / (blks_in_frags * fragsize)::numeric) < 0.2</code></pre>
 	
 	 
                 </div>
@@ -148,6 +166,37 @@
 
 
 
+
+
+
+    
+    
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Containerized</h2>
+                    <p class="lead">pgantenna is available as a Docker image for extreme convenience. </p>
+                </div>
+                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
+                    <pre><code>docker run -p 31337:80 pgantenna</code></pre>
+                </div>
+                
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    
+    
+    
+    
+    
+    
     <div class="content-section-a">
 
         <div class="container">
@@ -156,7 +205,7 @@
                 <div class="col-lg-5 col-sm-6">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Analysis</h2>
-                    <p class="lead"></p>
+                    <p class="lead">Execute arbitrary queries against a </p>
                 </div>
                 <div class="col-lg-6 col-lg-offset-1 col-sm-6">
                     <img class="img-responsive" src="images/antenna.png" alt="">
@@ -169,7 +218,10 @@
 
     </div>
     <!-- /.content-section-a -->
-
+    
+    
+    
+    
     
     <footer>
         <div class="container">
@@ -192,6 +244,7 @@
                 </div>
             </div>
         </div>
+        TODO baudline bg
     </footer>
 
     <!-- jQuery Version 1.11.0 -->

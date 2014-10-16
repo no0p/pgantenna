@@ -9,7 +9,7 @@ $(window).scroll(function (event) {
 			  $(".navbar").css("border-bottom", "0px");
 			}
 
-    	$(".navbar").css("background-color", "rgba(255, 255, 255, " + opace.toString() + ")");
+    	$(".navbar").css("background-color", "rgba(248, 248, 248, " + opace.toString() + ")");
     	$(".navbar").css("border-color", "#e7e7e7");
     	
     } else {

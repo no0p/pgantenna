@@ -8,6 +8,7 @@ body,
 html {
     width: 100%;
     height: 100%;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 body,
@@ -17,11 +18,11 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
-.navbar {
+#navbar {
   background-color: transparent;
   border: 0px;
 }
