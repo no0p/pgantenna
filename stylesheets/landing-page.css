@@ -21,6 +21,12 @@ h6 {
     font-weight: 700;
 }
 
+.navbar {
+  background-color: transparent;
+  border: 0px;
+}
+
+
 .lead {
     font-size: 18px;
     font-weight: 400;
@@ -168,8 +174,9 @@ pre {
 
 footer {
     padding: 50px 0;
-    background-image: url('../images/nvisionbg.jpg');
+    background-image: url('../images/staticyellow.jpg');
     background-repeat: repeat;
+    background-size: cover;
 }
 
 footer a {
