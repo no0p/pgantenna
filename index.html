@@ -47,9 +47,9 @@
 
         <!-- First Featurette -->
         <div class="featurette" id="about">
-            <img class="featurette-image img-responsive pull-right" style="margin-top: 70px;" src="images/staticyellow.jpg"/>
-            <h2 class="featurette-heading">Monitoring Framework</h2>
-						<p class="lead">Keep track of cluster status with streaming data from pgsampler.</p>
+            <a href="#"><img class="antenna_page featurette-image img-responsive pull-right" style="" src="images/dash_s.png"/></a>
+            <h2 class="featurette-heading">Monitoring  Framework</h2>
+						<p class="lead">Keep track of a cluster's current and historical status with live data from <a href="http://no0p.github.io/pgsampler/">pgsampler</a>.</p>
         </div>
 
         <hr class="featurette-divider">
@@ -58,42 +58,21 @@
 
         <!-- Second Featurette -->
         <div class="featurette" id="services">
-        <h2 class="featurette-heading">Or plot directly in <span class="text-muted">psql</span>.
-        </h2>
-        <br/>
+
+
         
-				<pre><code>
-=# <b>select plot('select x, y from data', 'set style data lines;');</b>
+        <h2 class="featurette-heading">Write alerts with <span class="text-muted">SQL</span>
+        </h2>
 
-                                                    plot                                                     
--------------------------------------------------------------------------------------------------------------
-                                                                                                            +
-     5 ++-----------+-----------+------------+-----------+------------+-----------+------------+--------****+
-       +            +           +            +           +            +           +            +  ******   ++
-   4.5 ++                                                                                   ******        +++
-       |                                                                              ******               |+
-     4 ++                                                                       ******                    +++
-       |                                                                   *****                           |+
-       |                                                              *****                                |+
-   3.5 ++                                                        *****                                    +++
-       |                                                    *****                                          |+
-     3 ++                                             ******                                              +++
-       |                                        ******                                                     |+
-   2.5 ++                                 ******                                                          +++
-       |                            ******                                                                 |+
-     2 ++                     ******                                                                      +++
-       |                 *****                                                                             |+
-       |            *****                                                                                  |+
-   1.5 ++      *****                                                                                      +++
-       +  *****     +           +            +           +            +           +            +           ++
-     1 ***----------+-----------+------------+-----------+------------+-----------+------------+----------+++
-       1           1.5          2           2.5          3           3.5          4           4.5          5+
-                                                         x                                                  +
-                                                                                                            +
- 
-(1 row)
 
-</code></pre>
+          <p class="lead">Has your cluster sent a heartbeat in the last minute? 	<a href="https://github.com/no0p/pgantenna/wiki/Alerts" class="subsubheader_link">Alert Documentation</a></p> 
+                    <pre class="code_fit"><code>SELECT measured_at as <strong>will_alert_if_null</strong>
+  FROM heartbeats
+    WHERE measured_at > (clock_timestamp() - interval '1 minute')
+  LIMIT 1</code></pre>
+	<br/>
+
+        
 
         </div>
 
@@ -102,10 +81,15 @@
         <!-- Third Featurette -->
         <div class="featurette" id="timeseries">
 
-            <h2 class="featurette-heading">Time Series
-            </h2>
-             C
-            <img class="" src="images/chart_tx_large.png">
+						<img src="images/tuple_scatter.png" style="margin-top: 20px;" class="pull-right"/>
+            <h2 class="featurette-heading">Plot Data with <span class="text-muted">SQL</span></h2>
+            <p class="lead">Query <a href="https://github.com/no0p/pgantenna/wiki/Pgantenna-Database-Reference">metric tables</a> to seamlessly create plots with <a href="http://no0p.github.io/plotpg/">plotpg</a>.
+            
+            <pre class="code_fit"><code>select distinct on (table_id) relpages, reltuples 
+  from stat_class
+    where reltuples > 0;</code></pre>
+            
+            
         </div>
         
         <hr class="featurette-divider">
@@ -113,16 +97,27 @@
         <!-- First Featurette -->
         <div class="featurette" id="varioustypes">
             
-            <h2 class="featurette-heading">Different result sets,  <span class="text-muted">different plots</span>.
+            <h2 class="featurette-heading">A Historical Record.
             </h2>
-            <p class="lead">The characteristics of the result set will determine plot types.  <a href="https://github.com/no0p/plotpg/wiki/The-plot-Function#plotting-conventions">Documentation</a></p>
+            <p class="lead">Analyze historical data with familiar tools in a dedicated, containerized cluster.</p>
 
-              <table>
-		            <tr>
-		              <td><img src="images/chart_6_histo.png" height="400px"></td>
-   		            <td style="padding-left: 60px"><img src="images/chart_1.png" height="400px"></td>
-   		          </tr>
-   		        </table>
+						<div>
+						<pre class="code_fit"><code>
+pgantenna=# select measured_at, checkpoints_timed, checkpoints_req, buffers_checkpoint 
+              from stat_bgwriter 
+                order by measured_at asc;
+
+ <b>measured_at</b>   | checkpoints_timed | checkpoints_req | buffers_checkpoint 
+---------------+-------------------+-----------------+-------------------
+ <b>22:39:45.3425</b> |                 0 |               0 |                 0
+ <b>22:42:57.4796</b> |                 1 |               0 |                82
+ <b>22:46:09.5859</b> |                 1 |               0 |                82
+ <b>22:49:21.6735</b> |                 2 |               0 |               115
+ <b>22:52:33.7706</b> |                 3 |               0 |               135
+ <b>22:55:36.8682</b> |                 3 |               0 |               135
+(6 rows)</code></pre>
+						</div>
+
 
         </div>
         
@@ -131,10 +126,11 @@
 
         <!-- Third Featurette -->
         <div class="featurette" id="why">
-            <h2 class="featurette-heading">Why plot in the database?</h2><br/>
-            <p class="lead leadx">"That's where the data is."  But really, no particular reason.</p>
-            
-            <p class="lead leadx">Plotpg was developed for an a custom charting facility in <a href="https://github.com/no0p/pgantenna">pgantenna</a>.</p>
+            <h2 class="featurette-heading">Getting Started</h2><br/>
+            <p class="lead leadx">The easiest way to run pgantenna is to start a Docker container.</p>
+            <pre class="code_fit"><code>$ docker run -p 24831:24831 -p 80:80 pgantenna </code></pre>
+            <br/><br/>
+            <p class="lead leadx">Next, install and configure <a href="http://no0p.github.io/pgsampler/">pgsampler</a> in your cluster.</p>
         </div>
 
         <hr class="featurette-divider">
@@ -146,16 +142,16 @@
                 	<table class="link_table">
                 	  <tr>
                 	    <td class="first">
-						            <a class="subheader_link" href="https://github.com/no0p/plotpg#installation">Installation</a>
+						            <a class="subheader_link" href="https://github.com/no0p/pgantenna#installation">Installation</a>
 						          </td>
 						          <td>
-						            <a class="subheader_link" href="https://github.com/no0p/plotpg">Source Code</a>
+						            <a class="subheader_link" href="https://github.com/no0p/pgantenna">Source Code</a>
 						          </td>
 						          <td>
-						         	  <a class="subheader_link" href="https://github.com/no0p/plotpg/wiki">Documentation</a>
+						         	  <a class="subheader_link" href="https://github.com/no0p/pgantenna/wiki">Documentation</a>
 						         	</td>
 						         	<td>
-						         	  <a class="subheader_link" href="https://github.com/no0p/plotpg/blob/master/LICENSE">Postgresql License</a>
+						         	  <a class="subheader_link" href="https://github.com/no0p/pgantenna/blob/master/LICENSE">Postgresql License</a>
 						         	</td>
 						        </tr>
 						      </table>
@@ -178,10 +174,11 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-7999296-11', 'auto');
+  ga('create', 'UA-7999296-12', 'auto');
   ga('send', 'pageview');
 
 </script>
+
 
 </body>
 

@@ -10,6 +10,23 @@ body {
 
 pre code {
 	font-size: 13pt;
+	
+}
+
+
+.alert_examples {
+	width: 50%;
+}
+
+.antenna_page {
+  opacity: 0.9;
+  margin-top: 40px; 
+  border: 2px solid #ccc;
+}
+
+
+.antenna_page:hover {
+	opacity: 1;
 }
 
 table.link_table td.first {
@@ -28,6 +45,11 @@ p.leadx {
 	margin-top: -50px;
 }
 
+.code_fit {
+  display: inline-block;
+  padding: 20px;
+}
+
 .navbar {
 		background-repeat: repeat;
 		border-bottom: 0px;
@@ -35,6 +57,10 @@ p.leadx {
 
 .subheader_link {
 	font-size: 20pt;
+}	
+
+.subsubheader_link {
+	font-size: 16pt;
 }	
 
 
