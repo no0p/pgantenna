@@ -9,17 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>pgsampler - a statistics collector for Postgresql</title>
+    <title>pgantenna - open source Postgresql monitoring and alerting</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="stylesheets/landing-page.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.1.0/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="stylesheets/one-page-wonder.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,237 +28,161 @@
 
 <body>
 
-
-    <!-- Header -->
-    <div class="intro-header">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>pgantenna</h1>
-                        <h3>open source Postgresql monitoring framework</h3>
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a href="https://github.com/no0p/pgantenna" class="btn btn-default btn-lg">
-                                	<i class="fa fa-github fa-fw"></i>
-                                	<span class="network-name">Source Code</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/no0p/pgantenna/wiki" class="btn btn-default btn-lg">
-                                  <i class="fa fa-linkedin fa-fw"></i> 
-                                  <span class="network-name">Documentation</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Full Width Image Header -->
+    <header class="header-image">
+        <div class="headline">
+            <div class="container">
+                <h2>pgantenna</h2>
+                <h3>open source Postgresql monitoring framework</h3><br/>
+                <a class="subheader_link" href="https://github.com/no0p/pgantenna">Source Code</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="subheader_link" href="https://github.com/no0p/pgantenna/wiki">Documentation</a>
             </div>
-
         </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.intro-header -->
+    </header>
 
     <!-- Page Content -->
+    <div class="container" >
 
-    <div class="content-section-a">
+        <hr class="featurette-divider">
 
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6 col-sm-6">
-                    <div class="clearfix"></div>
-                    <h1 class="section-heading">A Framework</h1>
-                    <p class="lead">Pgantenna receives database metrics from <a href="https://github.com/no0p/pgsampler">pgsampler</a>, and provides tools for monitoring, alerting, and reporting against this data.  
-                    <br/><br/>
-                    In this convention based framework, charts and alerts are are written entirely in SQL.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-1 col-sm-6">
-                  <br/>
-                  
-                </div>
-            </div>
+        <!-- First Featurette -->
+        <div class="featurette" id="about">
+            <img class="featurette-image img-responsive pull-right" style="margin-top: 70px;" src="images/staticyellow.jpg"/>
+            <h2 class="featurette-heading">Monitoring Framework</h2>
+						<p class="lead">Keep track of cluster status with streaming data from pgsampler.</p>
         </div>
 
-    </div>
-    <!-- /.content-section-a -->
-
-<div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="clearfix"></div>
-                    <h1 class="section-heading">Monitoring</h1>
-                    <p class="lead">
-                    Pgantenna stores time series for a <a href="https://github.com/no0p/pgantenna/wiki/Pgantenna-Database-Reference">variety of metrics</a> relating to database health and performance.  Custom charts are added to the pgantenna dashboard using <a href="http://no0p.github.io/plotpg/">plotpg</a>. 
-                    <br/>
-                    <a href="https://github.com/no0p/pgantenna/wiki/Alerts">Monitoring Documentation</a></p>
-                    
-                </div>
-                <div class="col-lg-7 col-lg-offset-1 col-sm-6">
-                  
-	 
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
+        <hr class="featurette-divider">
 
 
 
+        <!-- Second Featurette -->
+        <div class="featurette" id="services">
+        <h2 class="featurette-heading">Or plot directly in <span class="text-muted">psql</span>.
+        </h2>
+        <br/>
+        
+				<pre><code>
+=# <b>select plot('select x, y from data', 'set style data lines;');</b>
 
+                                                    plot                                                     
+-------------------------------------------------------------------------------------------------------------
+                                                                                                            +
+     5 ++-----------+-----------+------------+-----------+------------+-----------+------------+--------****+
+       +            +           +            +           +            +           +            +  ******   ++
+   4.5 ++                                                                                   ******        +++
+       |                                                                              ******               |+
+     4 ++                                                                       ******                    +++
+       |                                                                   *****                           |+
+       |                                                              *****                                |+
+   3.5 ++                                                        *****                                    +++
+       |                                                    *****                                          |+
+     3 ++                                             ******                                              +++
+       |                                        ******                                                     |+
+   2.5 ++                                 ******                                                          +++
+       |                            ******                                                                 |+
+     2 ++                     ******                                                                      +++
+       |                 *****                                                                             |+
+       |            *****                                                                                  |+
+   1.5 ++      *****                                                                                      +++
+       +  *****     +           +            +           +            +           +            +           ++
+     1 ***----------+-----------+------------+-----------+------------+-----------+------------+----------+++
+       1           1.5          2           2.5          3           3.5          4           4.5          5+
+                                                         x                                                  +
+                                                                                                            +
+ 
+(1 row)
 
-		<div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="clearfix"></div>
-                    <h1 class="section-heading">Write Alerts in SQL</h1>
-                    <p class="lead">An alert is triggered when an "alert query" returns a null value in the first column of the first cell.
-                    <br/>
-                    <a href="https://github.com/no0p/pgantenna/wiki/Alerts">Alerts Documentation</a></p>
-                    
-                </div>
-                <div class="col-lg-7 col-lg-offset-1 col-sm-6">
-                  <br/>
-                    <h4>Has my cluster sent a heartbeat in the last minute?</h4>
-                    <pre><code>SELECT measured_at as is_alive
-  FROM heartbeats
-    WHERE measured_at > (clock_timestamp() - interval '1 minute')
-  LIMIT 1</code></pre>
-	<br/><br/>
-<h4>Do any of my filesystems have less than 20% available space?</h4>
-                    <pre><code>WITH last_stats as (
-  SELECT DISTINCT ON (filesystem_id) 
-         filesystem_id, measured_at, blk_avail, blks_in_frags
-    FROM stat_filesystems
-      ORDER BY filesystem_id, measured_at DESC
-)
-SELECT filesystems.name
-  FROM filesystems
-    INNER JOIN last_stats ON last_stats.filesystem_id = filesystems.id
-  WHERE ((blk_avail * blksize) / (blks_in_frags * fragsize)::numeric) < 0.2</code></pre>
-	
-	 
-                </div>
-            </div>
+</code></pre>
 
         </div>
-        <!-- /.container -->
 
-    </div>
+        <hr class="featurette-divider">
 
+        <!-- Third Featurette -->
+        <div class="featurette" id="timeseries">
 
+            <h2 class="featurette-heading">Time Series
+            </h2>
+             C
+            <img class="" src="images/chart_tx_large.png">
+        </div>
+        
+        <hr class="featurette-divider">
 
+        <!-- First Featurette -->
+        <div class="featurette" id="varioustypes">
+            
+            <h2 class="featurette-heading">Different result sets,  <span class="text-muted">different plots</span>.
+            </h2>
+            <p class="lead">The characteristics of the result set will determine plot types.  <a href="https://github.com/no0p/plotpg/wiki/The-plot-Function#plotting-conventions">Documentation</a></p>
 
-
-
-
-    
-    
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Containerized</h2>
-                    <p class="lead">pgantenna is available as a Docker image for extreme convenience. </p>
-                </div>
-                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
-                    <pre><code>docker run -p 31337:80 pgantenna</code></pre>
-                </div>
-                
-            </div>
+              <table>
+		            <tr>
+		              <td><img src="images/chart_6_histo.png" height="400px"></td>
+   		            <td style="padding-left: 60px"><img src="images/chart_1.png" height="400px"></td>
+   		          </tr>
+   		        </table>
 
         </div>
-        <!-- /.container -->
+        
+        
+        <hr class="featurette-divider">
 
-    </div>
-    
-    
-    
-    
-    
-    
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Analysis</h2>
-                    <p class="lead">Execute arbitrary queries against a </p>
-                </div>
-                <div class="col-lg-6 col-lg-offset-1 col-sm-6">
-                    <img class="img-responsive" src="images/antenna.png" alt="">
-                </div>
-                
-            </div>
-
+        <!-- Third Featurette -->
+        <div class="featurette" id="why">
+            <h2 class="featurette-heading">Why plot in the database?</h2><br/>
+            <p class="lead leadx">"That's where the data is."  But really, no particular reason.</p>
+            
+            <p class="lead leadx">Plotpg was developed for an a custom charting facility in <a href="https://github.com/no0p/pgantenna">pgantenna</a>.</p>
         </div>
-        <!-- /.container -->
 
-    </div>
-    <!-- /.content-section-a -->
-    
-    
-    
-    
-    
-    <footer>
-        <div class="container">
+        <hr class="featurette-divider">
+
+        <!-- Footer -->
+        <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                          <a href="https://github.com/no0p/pgantenna">Source Code</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/no0p/pgantenna/wiki">Documentation</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/no0p/pgantenna/blob/master/LICENSE">License</a>
-                        </li>
-                        <li>
-                            <a href="https://no0p.github.io/pgsampler">Pgsampler</a>
-                        </li>
-                    </ul>
+                	<table class="link_table">
+                	  <tr>
+                	    <td class="first">
+						            <a class="subheader_link" href="https://github.com/no0p/plotpg#installation">Installation</a>
+						          </td>
+						          <td>
+						            <a class="subheader_link" href="https://github.com/no0p/plotpg">Source Code</a>
+						          </td>
+						          <td>
+						         	  <a class="subheader_link" href="https://github.com/no0p/plotpg/wiki">Documentation</a>
+						         	</td>
+						         	<td>
+						         	  <a class="subheader_link" href="https://github.com/no0p/plotpg/blob/master/LICENSE">Postgresql License</a>
+						         	</td>
+						        </tr>
+						      </table>
                 </div>
             </div>
-        </div>
-        TODO baudline bg
-    </footer>
+        </footer>
+
+    </div>
+    <!-- /.container -->
 
     <!-- jQuery Version 1.11.0 -->
     <script src="javascripts/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/pgantenna.js"></script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-7999296-12', 'auto');
+  ga('create', 'UA-7999296-11', 'auto');
   ga('send', 'pageview');
 
 </script>
+
 </body>
 
 </html>
