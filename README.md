@@ -14,4 +14,4 @@ The best way to run pgantenna is to launch a docker container based on a publicl
 docker run -p 24831:24831 -p 80:80 pgantenna
 ```
 
-You can now direct your postgresql cluster to begin shipping statistics to pgantenna by installing and <a href="https://github.com/no0p/pgsampler/wiki/Configuration">configuring pgsampler</a> to the pgantenna host.
+You can now direct your postgresql cluster to begin shipping statistics to pgantenna by installing pgsampler and <a href="https://github.com/no0p/pgsampler/wiki/Configuration">configuring pgsampler</a> to connect the pgantenna host.
