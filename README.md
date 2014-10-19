@@ -1,9 +1,9 @@
 ## Introduction
 
 pgantenna is an open source monitoring framework for Postgresql clusters.
-
+<br/><br/>
 The <a href="http://no0p.github.io/pgantenna/">project page</a> provides an overview of the framework.
-
+<br/><br/>
 The <a href="https://github.com/no0p/pgantenna/wiki">project wiki</a> has documentation on running and customizing pgantenna.
 
 ## Installation
