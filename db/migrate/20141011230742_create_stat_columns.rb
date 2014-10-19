@@ -13,7 +13,7 @@ class CreateStatColumns < ActiveRecord::Migration
 			t.decimal :correlation
 			
 			t.timestamp :measured_at, :null => false
-      t.timestamps
+
     end
   end
 end

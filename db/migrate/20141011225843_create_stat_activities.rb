@@ -12,7 +12,6 @@ class CreateStatActivities < ActiveRecord::Migration
 			t.timestamp	 :query_start
 			t.timestamp	 :state_change
       t.timestamp  :measured_at, :null => false
-      t.timestamps
     end
   end
 end

@@ -168,8 +168,6 @@ ActiveRecord::Schema.define(version: 20141012000725) do
     t.datetime "query_start"
     t.datetime "state_change"
     t.datetime "measured_at",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "stat_bgwriter", force: true do |t|
@@ -210,8 +208,6 @@ ActiveRecord::Schema.define(version: 20141012000725) do
     t.text     "most_common_freqs"
     t.decimal  "correlation"
     t.datetime "measured_at",         null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "stat_database", force: true do |t|
