@@ -134,10 +134,7 @@ class Antenna
 				                      :attnotnull => attnotnull,
 				                      :attnum => attnum)
 			    else
-			      # update attributes if changed
-			      if (column.data_type != data_type_name || column.attnotnull != attnotnull || column.attnum != attnum)
-			        Column.where(:table_id => table_id, :name => column_name).update_attributes(:attnotnull => attnotnull, :attnum => attnum, :data_type => data_type_name)
-			      end
+		        column.update_attributes(:attnotnull => attnotnull, :attnum => attnum, :data_type => data_type_name)
 			    end
 			  rescue ActiveRecord::RecordNotUnique => e
 				  #Swallow
@@ -199,7 +196,8 @@ class Antenna
 		    table_id = nil
 		    table_id = table.id if !table.nil?
 		    
-			  Index.where('database_id = ? and index_oid = ?',database_id, indexrelid).update(:indnatts => indnatts, :indkey => indkey, :indisunique => indisunique, :table_id => table_id)
+			  i = Index.where('database_id = ? and index_oid = ?',database_id, indexrelid).first
+			  i.update_attributes(:indnatts => indnatts, :indkey => indkey, :indisunique => indisunique, :table_id => table_id)
 	
 		  end
 		  return "OK+"
@@ -280,6 +278,7 @@ class Antenna
 	  # COLSTA
 	  # 
 	  def column_stats(data)
+ 	  	puts data
 	    data.chop! # Remove trailing group delimiter
 		  data.split(ARG_GROUP_DELIMITER).each do |r|
 			  database_name, schema_name, table_name, column_name, null_frac, avg_width, n_distinct, most_common_vals, most_common_freqs, correlation, measured_at = r.split(/#{ARG_DELIMITER}/, -1)
