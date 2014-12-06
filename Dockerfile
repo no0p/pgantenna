@@ -34,3 +34,8 @@ EXPOSE 24831
 ENTRYPOINT /bin/bash /opt/start.sh
 
 # Run with docker run -p 24831:24831 -p 80:80 pgantenna 
+#
+# Note on building for public repository: 
+#   docker build -t no0p/pgantenna .
+#   docker push no0p/pgantenna
+# 
